@@ -1,4 +1,4 @@
-from flask_restplus import  Resource, Api, Namespace
+from flask_restplus import  Resource, Namespace
 
 api = Namespace('user')
 
