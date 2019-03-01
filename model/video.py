@@ -13,7 +13,7 @@ class Video(Basemodel):
     data_path = db.Column(db.String(255), nullable=False)
     ef = db.Column(db.Float, nullable=True)
     gls = db.Column(db.Float, nullable=True)
-    annotations = db.relationship("Annotation", back_populates="video")
+    session = db.relationship('Session', backref='videos')
 
     def __init__(self, name, session_id, data_path):
         self.name = name

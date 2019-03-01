@@ -12,7 +12,7 @@ class Session(Basemodel):
     patient_name = db.Column(db.String(255), nullable=False)
     patient_age = db.Column(db.Integer, nullable=True)
     data_path = db.Column(db.String(255), nullable=False)
-    videos = db.relationship("Video", back_populates="session")
+    user = db.relationship('User', backref='sessions')
 
     def __init__(self, creator_id, patient_name, patient_age, data_path):
         self.creator_id = creator_id

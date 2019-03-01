@@ -1,8 +1,12 @@
 # coding=utf-8
+
 import logging
 from flask import Flask, redirect, url_for
-from apis import api_blueprint
+from flask_marshmallow import Marshmallow
+
 import model
+from api import api_blueprint
+
 
 __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
@@ -18,9 +22,12 @@ model.init_app(app)
 # add blueprint apis
 app.register_blueprint(api_blueprint)
 
+
+# redirect to api page
 @app.route('/')
 def redirect_to_blueprint():
     return redirect(api_blueprint.url_prefix)
+
 
 # run
 if __name__ == "__main__":
