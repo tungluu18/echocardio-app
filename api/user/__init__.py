@@ -104,3 +104,5 @@ class User(Resource):
             raise ValueError('Thiếu mật khẩu')
         if 'email' not in new_user:
             raise ValueError('Thiếu địa chỉ email')
+
+from api.user import login
