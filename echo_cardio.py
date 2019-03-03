@@ -1,7 +1,7 @@
 # coding=utf-8
 
 import logging
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, send_from_directory
 from flask_marshmallow import Marshmallow
 
 import model
@@ -21,6 +21,13 @@ model.init_app(app)
 
 # add blueprint apis
 app.register_blueprint(api_blueprint)
+
+
+# serve files
+@app.route('/data/<path:filename>')
+def download_file(filename):
+    return send_from_directory(
+        app.config['DATA_DIR'], filename, as_attachment=True)
 
 
 # redirect to api page

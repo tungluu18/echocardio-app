@@ -2,11 +2,12 @@
 
 import logging
 import json
-from flask import jsonify, request
+from flask import request
 from flask_restplus import Resource, fields
 from api.user import api
+from api.api_base import BaseApi
 from model.user import User as UserModel, UserSchema
-
+import util
 
 __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
@@ -21,35 +22,37 @@ user_schema = UserSchema()
 
 
 @api.route('/login')
-class Login(Resource):
-    @api.doc(description='Gửi username và password để đăng nhập',
-             body=login_fields)
+class Login(Resource, BaseApi):
+    @api.doc(description='Gửi username và password để đăng nhập')
     @api.expect(login_fields)
     def post(self):
-        login_args = json.loads(request.data)
         try:
-            self._is_valid(login_args)
+            login_args = util.valid_req(
+                request=request, comp_attr=['username', 'password'])
         except ValueError as err:
-            return str(err), 400
+            return self.api_response(error=str(err), http_code=400)
         try:
+            # find user by username
             user = UserModel.query.filter_by(
                 username=login_args['username']).first()
             if not user:
-                return 'Tài khoản không tồn tại', 404
+                return self.api_response(
+                    error='Tài khoản không tồn tại', http_code=400)
+
+            # dump user to dict
             user_dump = user_schema.dump(user).data
+
             # check password
-            if UserModel._check_password(
+            if not UserModel._check_password(
                     pw_hash=user_dump['password'],
                     pw_raw=login_args['password']):
-                return 'Success'
-            else:
-                return 'Sai mật khẩu', 404
-        except Exception as e:
-            return 'Internal server error!', 500
+                return self.api_response(error='Sai mật khẩu', http_code=400)
 
-    @staticmethod
-    def _is_valid(login_args):
-        if 'username' not in login_args:
-            raise ValueError('Thiếu tên đăng nhập')
-        if 'password' not in login_args:
-            raise ValueError('Thiếu mật khẩu')
+            # filter before response
+            resp = util.remove_attr(
+                user_dump,
+                ['password', 'created_at', 'updated_at'])
+            return self.api_response(data=resp)
+        except Exception as e:
+            return self.api_response(
+                error='Internal server error!', http_code=500)
