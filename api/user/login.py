@@ -13,7 +13,7 @@ __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
 
 
-login_fields = api.model('Resource', {
+login_fields = api.model('login_fields', {
     'username': fields.String(255),
     'password': fields.String(255)
 })

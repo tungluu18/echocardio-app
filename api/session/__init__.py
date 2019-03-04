@@ -16,7 +16,7 @@ _logger = logging.getLogger(__name__)
 
 api = Namespace('sessions')
 
-session_field = api.model('Resource', {
+session_field = api.model('session_fields', {
     'patient_name': fields.String(required=True),
     'patient_age': fields.String(required=True),
     'creator_id': fields.Integer(required=True)

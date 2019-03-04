@@ -1,8 +1,7 @@
 # coding=utf-8
 
 import logging
-from flask import Flask, redirect, url_for, send_from_directory
-from flask_marshmallow import Marshmallow
+from flask import Flask, redirect, url_for, send_from_directory, request
 
 import model
 from api import api_blueprint
@@ -36,6 +35,9 @@ def redirect_to_blueprint():
     return redirect(api_blueprint.url_prefix)
 
 
+app.logger.handlers.extend(_logger.handlers)
+app.logger.setLevel(logging.DEBUG)
+
 # run
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run()

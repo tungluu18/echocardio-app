@@ -18,14 +18,14 @@ api = Namespace('users')
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
-user_field = api.model('Resource', {
-    'username': fields.String(255),
-    'password': fields.String(255),
-    'email': fields.String(255),
-    'job': fields.String(255),
-    'organization': fields.String(255),
-    'address': fields.String(255),
-    'phone': fields.String(20)
+user_fields = api.model('user_fields', {
+    'username': fields.String(),
+    'password': fields.String(),
+    'email': fields.String(),
+    'job': fields.String(),
+    'organization': fields.String(),
+    'address': fields.String(),
+    'phone': fields.String()
 })
 
 
@@ -43,7 +43,7 @@ class User(Resource, BaseApi):
         return self.api_response(data=resp)
 
     @api.doc(description='Cap nhat thong tin mot tai khoan')
-    @api.expect(user_field)
+    @api.expect(user_fields)
     def put(self):
         try:
             update_args = util.valid_req(

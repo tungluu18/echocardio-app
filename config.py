@@ -4,6 +4,7 @@ import os
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = 'data'
 SESSION_DIR = 'sessions'
+UPLOAD_DIR = 'data/tmp'
 
 # DATABASE
 _DB_NAME = 'echo_cardio'

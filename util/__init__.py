@@ -23,11 +23,11 @@ def valid_req(request, comp_attr=[], ext_attr=[]):
     """
     try:
         req_loaded = json.loads(request.data)
-        req_attr = req_loaded.keys()
-        if not set(req_attr) >= set(comp_attr):
-            raise ValueError('Request must have: ' + ','.join(comp_attr))
-        req_filtered = filter_attr(req_loaded, comp_attr + ext_attr)
-        return req_filtered
     except Exception as e:
         raise ValueError(
             'Cannot parse request, request format must be application/json!')
+    req_attr = req_loaded.keys()
+    if not set(req_attr) >= set(comp_attr):
+        raise ValueError('Request must have: ' + ', '.join(comp_attr))
+    req_filtered = filter_attr(req_loaded, comp_attr + ext_attr)
+    return req_filtered

@@ -21,7 +21,8 @@ api = Api(
 
 from .session import api as api_session
 from .user import api as api_user
+from .asset import api as api_asset
 
 api.add_namespace(api_user)
 api.add_namespace(api_session)
-
+api.add_namespace(api_asset)

@@ -1,7 +1,0 @@
-- quan ly user
-	sua thong tin tai khoan chua username va email
-- xem user tat ca nguoi dung
-- admin quyen phe duyet account
-- trang thai login:
-	sai mat khau, tai khoan, chua activate
-

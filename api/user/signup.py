@@ -4,7 +4,7 @@ import logging
 import json
 from flask import request
 from flask_restplus import Resource, fields
-from api.user import api, user_field
+from api.user import api, user_fields
 from api.api_base import BaseApi
 from model import db
 from model.user import User as UserModel
@@ -17,7 +17,7 @@ _logger = logging.getLogger(__name__)
 @api.route('/signup')
 class Signup(Resource, BaseApi):
     @api.doc(description='Tao moi 1 user')
-    @api.expect(user_field)
+    @api.expect(user_fields)
     def post(self):
         try:
             signup_args = util.valid_req(
