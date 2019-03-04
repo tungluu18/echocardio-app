@@ -16,7 +16,7 @@ _logger = logging.getLogger(__name__)
 
 @api.route('/signup')
 class Signup(Resource, BaseApi):
-    @api.doc(description='Tao moi 1 user')
+    @api.doc(description='Đăng ký tài khoản')
     @api.expect(user_fields)
     def post(self):
         try:

@@ -49,10 +49,10 @@ class Login(Resource, BaseApi):
                 return self.api_response(error='Sai mật khẩu', http_code=400)
 
             # filter before response
-            resp = util.remove_attr(
-                user_dump,
-                ['password', 'created_at', 'updated_at'])
-            return self.api_response(data=resp)
+            # resp = util.remove_attr(
+            #     user_dump,
+            #     ['password', 'created_at', 'updated_at'])
+            return self.api_response(data={'user_id': user.id})
         except Exception as e:
             return self.api_response(
                 error='Internal server error!', http_code=500)
