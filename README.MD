@@ -5,10 +5,15 @@
 * python3
 * python3 virtualenv
 #### Cài đặt
+
 > git clone https://github.com/tungluu18/echocardio-app.git
+
 > cd ./echocardio-app
+
 > python3 -m venv venv
+
 > source ./venv/bin/activate
+
 > pip3 install -r requirement.txt
 
 Cấu hình database trong file **config.py**
