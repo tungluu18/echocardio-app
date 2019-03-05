@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  app:
+    build:
+      ./server
+    restart: on-failure
+    links:
+      - database
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server/api:/app/api
+      - ./server/data:/app/data
+      - ./server/model:/app/model
+      - ./server/module:/app/module
+      - ./server/util:/app/util
+    environment:
+    - FLASK_ENV=development
+    - FLASK_DEBUG=true
+    - FLASK_APP=echo_cardio
+    - ECHO_DB_NAME=echo_cardio
+    - ECHO_DB_USER=root
+    - ECHO_DB_PWD=tungluu18
+    - ECHO_DB_HOST=database
+    - ECHO_DB_PORT=3306
+    command: >
+      bash -c "python3 init_db.py && gunicorn -w 4 -b 0.0.0.0:5000 wsgi:app --reload"
+
+  database:
+    image: mysql:8.0
+    ports:
+      - "32000:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: echo_cardio
+      MYSQL_ROOT_PASSWORD: tungluu18
+      MYSQL_USER: tungluu18
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - db:/var/lib/mysql
+    restart: on-failure
+
+volumes:
+  db:
