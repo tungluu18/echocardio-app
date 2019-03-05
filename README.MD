@@ -14,7 +14,7 @@
 
 > source ./venv/bin/activate
 
-> pip3 install -r requirement.txt
+> pip install -r requirement.txt
 
 Cấu hình database trong file **config.py**
 * _DB_HOST và _DB_PORT: mặc định là localhost và 3306 cho mysql cài đặt trên local
