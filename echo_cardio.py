@@ -2,6 +2,7 @@
 
 import logging
 from flask import Flask, redirect, url_for, send_from_directory, request
+from flask_cors import CORS
 
 import model
 from api import api_blueprint
@@ -21,7 +22,6 @@ model.init_app(app)
 # add blueprint apis
 app.register_blueprint(api_blueprint)
 
-
 # serve files
 @app.route('/data/<path:filename>')
 def download_file(filename):
@@ -34,6 +34,8 @@ def download_file(filename):
 def redirect_to_blueprint():
     return redirect(api_blueprint.url_prefix)
 
+# cross origin resource sharing
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.logger.handlers.extend(_logger.handlers)
 app.logger.setLevel(logging.DEBUG)

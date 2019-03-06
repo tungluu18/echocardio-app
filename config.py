@@ -9,7 +9,7 @@ UPLOAD_DIR = 'data/tmp'
 # DATABASE
 _DB_NAME = 'echo_cardio'
 _DB_USER = 'tungluu18'
-_DB_PWD = 'tekovn123'
+_DB_PWD = 'tekovn1234'
 _DB_HOST = 'localhost'
 _DB_PORT = '3306'
 
