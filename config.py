@@ -17,3 +17,5 @@ _DB_PORT = '3306'
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://%s:%s@%s:%s/%s' % \
         (_DB_USER, _DB_PWD, _DB_HOST, _DB_PORT, _DB_NAME)
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png', 'json', 'mp4'])

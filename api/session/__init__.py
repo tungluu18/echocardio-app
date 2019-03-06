@@ -7,8 +7,8 @@ from api.api_base import BaseApi
 from model import db
 from model.user import User as UserModel
 from model.session import Session as SessionModel
-from module.dir import create_session_folder, \
-    get_session_folder_path, remove_session_folder
+# from module.dir import create_session_folder, \
+    # get_session_folder_path, remove_session_folder
 import util
 
 __author__ = 'Tung.Luu'
@@ -43,16 +43,16 @@ class Session(Resource, BaseApi):
             return self.api_response(error='Người tạo không hợp lệ',
                                      http_code=400)
 
-        try:
-            session = SessionModel(**create_args)
-            db.session.add(session)
-            db.session.commit()
-            data_path = create_session_folder(session.id)
-            setattr(session, 'data_path', get_session_folder_path(session.id))
-            db.session.commit()
-            return self.api_response(data={'session_id': session.id})
-        except Exception as e:
-            _logger.error(e)
-            db.session.rollback()
-            return self.api_response(error='Internal server error!',
-                                     http_code=500)
+        # try:
+        #     session = SessionModel(**create_args)
+        #     db.session.add(session)
+        #     db.session.commit()
+        #     data_path = create_session_folder(session.id)
+        #     setattr(session, 'data_path', get_session_folder_path(session.id))
+        #     db.session.commit()
+        #     return self.api_response(data={'session_id': session.id})
+        # except Exception as e:
+        #     _logger.error(e)
+        #     db.session.rollback()
+        #     return self.api_response(error='Internal server error!',
+        #                              http_code=500)

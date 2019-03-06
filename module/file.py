@@ -1,9 +1,10 @@
-# coding=utf8
+# coding=utf-8
 
 import logging
 import os
 import config
 import shutil
+from util import allowed_filename
 from werkzeug.utils import secure_filename
 
 __author__ = 'Tung.Luu'
@@ -11,7 +12,7 @@ _logger = logging.getLogger(__name__)
 
 
 def save_file_to_dir(dir, file):
-    if file.filename == '':
+    if file.filename == '' or not allowed_filename(file.filename):
         return
     try:
         filename = secure_filename(file.filename)
@@ -24,7 +25,6 @@ def save_file_to_dir(dir, file):
         if not os.path.exists(path_to_file):
             os.makedirs(path_to_file)
         file.save(os.path.join(path_to_file, filename))
-
         return os.path.join(dir, filename)
     except Exception as err:
         _logger.error(err)

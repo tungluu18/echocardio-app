@@ -1,7 +1,9 @@
 # coding=utf-8
 
 import logging
+
 import json
+from flask import current_app as app
 
 __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
@@ -31,3 +33,8 @@ def valid_req(request, comp_attr=[], ext_attr=[]):
         raise ValueError('Request must have: ' + ', '.join(comp_attr))
     req_filtered = filter_attr(req_loaded, comp_attr + ext_attr)
     return req_filtered
+
+
+def allowed_filename(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']

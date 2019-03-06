@@ -1,22 +1,17 @@
-# coding=utf8
+# coding=utf-8
 
 import logging
 import os
-import config
+from flask import current_app as app
+# import config
 import shutil
 
 __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
 
-
-def get_session_folder_path(session_id):
-    session_path = os.path.join(
-        config.DATA_DIR, config.SESSION_DIR, str(session_id))
-    return session_path
-
-
-def create_session_folder(session_id):
-    path = os.path.join(config.ROOT_DIR, get_session_folder_path(session_id))
+def create_folder(path):
+    path = os.path.join(
+        *[app.config['ROOT_DIR'], app.config['DATA_DIR'], path])
     try:
         os.makedirs(path)
     except OSError:
@@ -24,12 +19,20 @@ def create_session_folder(session_id):
     else:
         _logger.info('Successfully created session folder %s' % path)
 
+def clear_dir(path, except_filename):
+    try:
+        for f in os.listdir(path):
+            if f not in except_filename:
+                os.remove(os.path.join(path, f))
+    except Exception as err:
+        _logger.error(err)
 
-def remove_session_folder(session_id):
-    path = os.path.join(config.ROOT_DIR, get_session_folder_path(session_id))
+def remove_session_folder(path):
+    path = os.path.join(app.config['ROOT_DIR'])
     try:
         shutil.rmtree(path)
     except OSError:
         _logger.error('Removal of session folder %s failed' % path)
     else:
         _logger.info('Successfully removed session folder %s' % path)
+
