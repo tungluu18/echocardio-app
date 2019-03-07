@@ -13,13 +13,13 @@ _round_number = 10
 class User(Basemodel):
     __tablename__ = 'user'
 
-    username = db.Column(db.String(255), primary_key=True, unique=True)
+    username = db.Column(db.String(length=255, collation='utf8_general_ci'), primary_key=True, unique=True)
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), primary_key=True, nullable=False)
     phone = db.Column(db.String(255), nullable=True)
-    address = db.Column(db.String(255), nullable=True)
-    organization = db.Column(db.String(255), nullable=True)
-    job = db.Column(db.String(255), nullable=True)
+    address = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
+    organization = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
+    job = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
 
     def __init__(self, username, email, password,
                  job=None, address=None,
