@@ -1,13 +1,14 @@
 # coding=utf-8
 
 import logging
-import json
+import os
 import util
 from flask_restplus import Resource, Namespace, fields
-from flask import jsonify, request
+from flask import request
 from api.api_base import BaseApi
 from model import db
 from model.user import UserSchema, User as UserModel
+from module.dir import remove_folder
 import util
 
 __author__ = 'Tung.Luu'
@@ -29,6 +30,22 @@ user_fields = api.model('user_fields', {
 
 @api.route('/<int:user_id>')
 class UserDetail(Resource, BaseApi):
+    @api.doc(description='Xóa user theo user_id')
+    def delete(self, user_id):
+        try:
+            user = UserModel.query.filter_by(id=user_id).first()
+            if not user:
+                return self.api_response(error='Tài khoản không tồn tại',
+                                         http_code=404)
+            remove_folder(os.path.join('backup', str(user.id)))
+            db.session.delete(user)
+            return self.api_response(data='Success')
+        except Exception as err:
+            _logger.error(err)
+            db.session.rollback()
+            return self.api_response(error='Internal server error!',
+                                     http_code=500)
+
     @api.doc(description='Trả về thông tin cụ thể của user theo user_id')
     def get(self, user_id):
         try:

@@ -26,7 +26,6 @@ class Backup(Resource, BaseApi):
             session = self._valid_params(creator_id, session_name)
         except ValueError as err:
             return self.api_response(error=str(err), http_code=400)
-
         if not SessionModel.query.filter_by(creator_id=creator_id,
                 patient_name=session.patient_name, patient_age=session.patient_age).first():
             # session has not existed

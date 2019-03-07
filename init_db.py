@@ -8,5 +8,6 @@ __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
 
 _logger.info('Creating database...')
+db.drop_all()
 db.create_all()
 _logger.info('Database created!')

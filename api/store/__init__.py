@@ -9,9 +9,5 @@ _logger = logging.getLogger(__name__)
 
 api = Namespace('store')
 
-@api.route('/')
-class Store(Resource, BaseApi):
-    def get(self):
-        return 'ahihi'
-
 from api.store import backup
+from api.store import restore

@@ -28,7 +28,8 @@ def init_app(app):
 
 
 from model.basemodel import Basemodel
-from model.annotation import Annotation
-from model.video import Video
-from model.session import Session
 from model.user import User
+from model.session import Session
+from model.video import Video
+
+

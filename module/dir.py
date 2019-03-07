@@ -19,7 +19,7 @@ def create_folder(path):
     else:
         _logger.info('Successfully created session folder %s' % path)
 
-def clear_dir(path, except_filename):
+def clean_dir(path, except_filename):
     try:
         for f in os.listdir(path):
             if f not in except_filename:
@@ -27,8 +27,9 @@ def clear_dir(path, except_filename):
     except Exception as err:
         _logger.error(err)
 
-def remove_session_folder(path):
-    path = os.path.join(app.config['ROOT_DIR'])
+def remove_folder(path):
+    path = os.path.join(
+        *[app.config['ROOT_DIR'], app.config['DATA_DIR'], path])
     try:
         shutil.rmtree(path)
     except OSError:
