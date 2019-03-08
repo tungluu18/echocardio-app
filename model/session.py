@@ -17,10 +17,10 @@ class Session(Basemodel):
     name = db.Column(db.String(length=255, collation='utf8_general_ci'), primary_key=True, nullable=False)
     patient_name = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=False)
     patient_age = db.Column(db.Integer, nullable=False)
-    user = db.relationship('User', backref='sessions')
     num_video = db.Column(db.Integer(), nullable=True)
     auto_ef = db.Column(db.Float(), nullable=True)
     man_ef = db.Column(db.Float(), nullable=True)
+    user = db.relationship('User', backref='sessions')
 
     def __init__(self, creator_id, name):
         self.creator_id = creator_id

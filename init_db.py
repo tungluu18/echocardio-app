@@ -7,7 +7,15 @@ from echo_cardio import app
 __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
 
-_logger.info('Creating database...')
+print('Clearing data...')
+def clear_data(session):
+    meta = db.metadata
+    for table in reversed(meta.sorted_tables):
+        print('Clear table %s' % table)
+        db.session.execute(table.delete())
+    db.session.commit()
 db.drop_all()
+
+print('Creating database...')
 db.create_all()
-_logger.info('Database created!')
+print('Database created!')

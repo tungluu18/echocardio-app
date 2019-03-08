@@ -90,7 +90,6 @@ def clean_backup_data(session, save_path, filenames, video_files):
         except_filename=filenames)
     # clean old video in db
     videos_by_session = VideoModel.query.filter_by(session_id=session.id)
-    print('cleaning', video_files)
     for video in videos_by_session:
         print(video.name)
         if video.name not in video_files:
