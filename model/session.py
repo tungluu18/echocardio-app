@@ -25,7 +25,7 @@ class Session(Basemodel):
     def __init__(self, creator_id, name):
         self.creator_id = creator_id
         self.name = name
-        patient_name, patient_age, time = name.split('_')
+        patient_name, patient_age = name.split('_')[:2]
         self.patient_age = int(patient_age)
         self.patient_name = patient_name
 
