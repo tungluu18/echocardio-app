@@ -8,6 +8,8 @@ from flask import request
 from api.api_base import BaseApi
 from model import db
 from model.user import UserSchema, User as UserModel
+from model.session import Session as SessionModel
+from model.video import Video as VideoModel
 from module.dir import remove_folder
 import util
 
@@ -38,7 +40,14 @@ class UserDetail(Resource, BaseApi):
                 return self.api_response(error='Tài khoản không tồn tại',
                                          http_code=404)
             remove_folder(os.path.join('backup', str(user.id)))
+
+            for session in SessionModel.query.filter_by(creator_id=user_id):
+                for video in VideoModel.query.filter_by(session_id=session.id):
+                    db.session.delete(video)
+                db.session.delete(session)
+
             db.session.delete(user)
+            db.session.commit()
             return self.api_response(data='Success')
         except Exception as err:
             _logger.error(err)

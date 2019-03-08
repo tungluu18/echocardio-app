@@ -31,7 +31,8 @@ def remove_folder(path):
     path = os.path.join(
         *[app.config['ROOT_DIR'], app.config['DATA_DIR'], path])
     try:
-        shutil.rmtree(path)
+        if os.path.exists(path):
+            shutil.rmtree(path)
     except OSError:
         _logger.error('Removal of session folder %s failed' % path)
     else:

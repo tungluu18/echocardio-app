@@ -1,7 +1,7 @@
 # coding=utf-8
 
 import logging
-from flask import Flask, redirect, url_for, send_from_directory, request
+from flask import Flask, redirect, send_from_directory
 from flask_cors import CORS
 
 import model
