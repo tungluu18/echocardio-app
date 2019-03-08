@@ -24,3 +24,4 @@ pytz==2018.9
 six==1.12.0
 SQLAlchemy==1.2.18
 Werkzeug==0.14.1
+flask-cors==3.0.7
