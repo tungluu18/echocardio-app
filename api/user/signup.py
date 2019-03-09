@@ -23,7 +23,7 @@ class Signup(Resource, BaseApi):
             signup_args = util.valid_req(
                 request,
                 comp_attr=['username', 'password', 'email'],
-                ext_attr=['job', 'organization', 'phone', 'address'])
+                ext_attr=['job', 'organization', 'phone', 'address', 'department'])
         except ValueError as err:
             return self.api_response(error=str(err), http_code=400)
 

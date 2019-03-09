@@ -28,6 +28,7 @@ class Restore(Resource, BaseApi):
                 'name': session.name,
                 'patient_name': session.patient_name,
                 'patient_age': session.patient_age,
+                'created_at': str(session.created_at),
                 'man_ef': session.man_ef,
                 'auto_ef': session.auto_ef,
                 'data': []

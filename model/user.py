@@ -19,18 +19,21 @@ class User(Basemodel):
     phone = db.Column(db.String(255), nullable=True)
     address = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
     organization = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
+    department = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
     job = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
 
     def __init__(self, username, email, password,
                  job=None, address=None,
-                 phone=None, organization=None):
+                 phone=None, organization=None,
+                 department=None):
         self.username = username
         self.email = email
         self.password = self._encrypt_password(password)
         self.job = job
-        self.organization = organization
         self.phone = phone
         self.address = address
+        self.organization = organization
+        self.department = department
 
     @classmethod
     def is_existed(self, username):

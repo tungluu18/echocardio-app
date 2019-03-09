@@ -26,7 +26,8 @@ user_fields = api.model('user_fields', {
     'job': fields.String(),
     'organization': fields.String(),
     'address': fields.String(),
-    'phone': fields.String()
+    'phone': fields.String(),
+    'department': fields.String()
 })
 
 
@@ -78,7 +79,7 @@ class UserDetail(Resource, BaseApi):
             update_args = util.valid_req(
                 request=request,
                 ext_attr=['password', 'job', 'organization',
-                          'phone', 'address'])
+                          'phone', 'address', 'department'])
         except ValueError as err:
             return self.api_response(error=str(err), http_code=400)
 

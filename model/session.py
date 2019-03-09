@@ -1,7 +1,7 @@
 # coding=utf-8
-
 import logging
 import os
+from datetime import datetime
 
 from model import db, Basemodel
 
@@ -25,9 +25,10 @@ class Session(Basemodel):
     def __init__(self, creator_id, name):
         self.creator_id = creator_id
         self.name = name
-        patient_name, patient_age = name.split('_')[:2]
+        patient_name, patient_age, created_at = name.split('_', 2)
         self.patient_age = int(patient_age)
         self.patient_name = patient_name
+        self.created_at = datetime.strptime(created_at, '%Y_%m_%d_%H_%M_%S')
 
     @staticmethod
     def _data_path(creator_id, session_name):
