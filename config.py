@@ -11,7 +11,7 @@ UPLOAD_DIR = 'data/tmp'
 # DATABASE
 _DB_NAME = 'echo_cardio'
 _DB_USER = 'tungluu18'
-_DB_PWD = 'tekovn123'
+_DB_PWD = 'tekovn1234'
 _DB_HOST = 'localhost'
 _DB_PORT = '3306'
 
@@ -21,3 +21,6 @@ SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://%s:%s@%s:%s/%s' % \
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png', 'json', 'mp4'])
+
+# UPLOAD FILES
+MAX_CONTENT_LENGTH = 1000 * 1024 * 1024
