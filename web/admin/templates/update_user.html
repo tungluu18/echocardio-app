@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel=stylesheet type=text/css href="{{css_url}}">
+    <link rel="shortcut icon" href="/static/cardiogram.png">
+    <title>Update user {{user.username}}</title>
+</head>
+
+<body>
+    <div class="container py-3">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-9">
+                <form class="card card-body" action="{{update_user_url}}" method="post">
+                    <h4 class="text-center">Update profile of user {{user.username}}</h4>
+                    <div class="form-group row">
+                        <label for="email" class="col-2 col-form-label">Email</label>
+                        <input id="email" name="email" class="col-8 form-control" type="email" value="{{user.email}}" />
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col-2 col-form-label">Phone</label>
+                        <input id="phone" name="phone" class="col-3 form-control" type="text" value="{{user.phone}}" />
+
+                        <label for="job" class="text-center col-1 col-form-label">Job</label>
+                        <input id="job" name="job" class="col-4 form-control" type="text" value="{{user.job}}" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="address" class="col-2 col-form-label">Address</label>
+                        <input id="address" name="address" class="col-8 form-control" type="text" value="{{user.address}}" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="organization" class="col-2 col-form-label">Organization</label>
+                        <input id="organization" name="organization" class="col-8 form-control" type="text" value="{{user.organization}}" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="department" class="col-2 col-form-label">Department</label>
+                        <input id="department" name="department" class="col-8 form-control" type="text" value="{{user.department}}" />
+                    </div>
+
+                    <div class="row d-flex justify-content-center">
+                        <button type="button" class="col-sm-4 btn btn-danger mx-2" onclick="window.history.go(-1)">
+                            Back
+                        </button>
+                        <button class="col-sm-4 btn btn-primary" type="submit"
+                            onclick="if (!confirm('Update profile of this user ?')) return false;" value="submit">
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

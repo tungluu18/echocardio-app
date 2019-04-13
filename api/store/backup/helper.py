@@ -71,12 +71,16 @@ def update_video_annotation(session, save_path, files):
 def update_session_info(session, session_json):
     file_path = os.path.join(
         *[app.config['ROOT_DIR'], app.config['DATA_DIR'], session_json])
-    with open(file_path) as f:
-        session_info = json.load(f)
     try:
-        session.num_video = session_info['num_video']
-        session.man_ef = session_info['man_ef']
-        session.auto_ef = session_info['auto_ef']
+        with open(file_path) as f:
+            session_info = json.load(f)
+    except Exception as err:
+        raise ValueError('File session không đúng định dạng')
+
+    try:
+        session.num_video = session_info.get('num_video', None)
+        session.man_ef = session_info.get('man_ef', None)
+        session.auto_ef = session_info.get('auto_ef', None)
         db.session.commit()
     except Exception as err:
         _logger.error(err)

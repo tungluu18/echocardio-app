@@ -21,6 +21,7 @@ class User(Basemodel):
     organization = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
     department = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
     job = db.Column(db.String(length=255, collation='utf8_general_ci'), nullable=True)
+    status = db.Column(db.String(length=20), default='inactive', nullable=False)
 
     def __init__(self, username, email, password,
                  job=None, address=None,
@@ -38,6 +39,11 @@ class User(Basemodel):
     @classmethod
     def is_existed(self, username):
         return bool(self.query.filter_by(username=username).first())
+
+    def is_active(self):
+        if self.status != 'active':
+            raise ValueError('User %s has not been activated by admin.' % (self.username))
+        return True
 
     @staticmethod
     def _encrypt_password(password):

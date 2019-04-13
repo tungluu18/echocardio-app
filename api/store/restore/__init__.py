@@ -18,9 +18,14 @@ _logger = logging.getLogger(__name__)
 class Restore(Resource, BaseApi):
     @api.doc(description='Restore data đã backup theo user_id')
     def get(self, user_id):
-        if not UserModel.query.filter_by(id=user_id).first():
+        user = UserModel.query.filter_by(id=user_id).first()
+        if not user:
             return self.api_response(error='Người dùng không tồn tại!', http_code=400)
-
+        try:
+            assert user.is_active()
+        except ValueError as err:
+            _logger.error(err)
+            return self.api_response(http_code=400, error=str(err))
         resp = []
         sessions = SessionModel.query.filter_by(creator_id=user_id)
         for session in sessions:

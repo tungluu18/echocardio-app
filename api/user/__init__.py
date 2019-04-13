@@ -63,10 +63,14 @@ class UserDetail(Resource, BaseApi):
             if not user:
                 return self.api_response(error='Tài khoản không tồn tại',
                                          http_code=404)
+            assert user.is_active()
             user_dump = user_schema.dump(user).data
             resp = util.remove_attr(user_dump,
                                     ['password', 'created_at', 'updated_at'])
             return self.api_response(data=resp)
+        except ValueError as err:
+            _logger.err(err)
+            return self.api_response(error=str(err), http_code=400)
         except Exception as err:
             _logger.error(err)
             return self.api_response(error='Internal server error!',

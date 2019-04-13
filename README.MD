@@ -25,6 +25,10 @@ Cấu hình database trong file **config.py**
 #### Khởi tạo database
 > python3 init_db.py
 
+#### Seed dữ liệu người dùng (test only)
+> python3 seed_db.py
+(Mật khẩu mặc định là 123456)
+
 ### Chạy app
 > ./start.sh
 hoặc
@@ -32,3 +36,6 @@ hoặc
 
 #### Kiểm tra
 > http://127.0.0.1:5000/api/v1
+
+#### Trang quản lý của admin
+> http://127.0.0.1:5000/website/admin/homepage

@@ -23,8 +23,15 @@ class Backup(Resource, BaseApi):
     @api.doc(description='Backup data của một session')
     def post(self, creator_id, session_name):
         print('Received backup request!')
-        if not UserModel.query.filter_by(id=creator_id).first():
+        user = UserModel.query.filter_by(id=creator_id).first()
+        if not user:
             return self.api_response(http_code=400, error='Người dùng không tồn tại!')
+        try:
+            assert user.is_active()
+        except ValueError as err:
+            _logger.error(err)
+            return self.api_response(http_code=400, error=str(err))
+
         session = SessionModel.query.filter_by(name=session_name).first()
         if not session:  # session has not existed
             try:
@@ -44,6 +51,9 @@ class Backup(Resource, BaseApi):
         try:
             resolve_session_data(session=session, request=request)
             return self.api_response(data='Success', http_code=200)
+        except ValueError as err:
+            _logger.error(err)
+            return self.api_response(http_code=400, error=str(err))
         except Exception as err:
             _logger.error(err)
             return self.api_response(http_code=500, error='Internal server error!')

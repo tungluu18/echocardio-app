@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/static/cardiogram.png">
+    <link rel=stylesheet type=text/css href="{{css_url}}">
+    <title>Admin' s Homepage</title>
+</head>
+
+<body>
+    <div class="m-4" id="container">
+        <h3>Danh sách người dùng</h3>
+        <div class="scollable">
+            <table class="table table-striped table-hover table-condensed table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Index</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Organization</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Job</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    {% for user in users %}
+                    <tr>
+                        <td class='text-center'>{{user.id}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phone}}</td>
+                        <td>{{user.address}}</td>
+                        <td>{{user.organization}}</td>
+                        <td>{{user.department}}</td>
+                        <td>{{user.job}}</td>
+                        <td class="text-center">
+                            {% if user.status == 'active' %}
+                            <button class="btn btn-success">
+                                active
+                            </button>
+                            {% else %}
+                            <form onsubmit="if (!confirm('Confirm activation ?')) return false;"
+                                action="activate/user?user_id={{user.id}}" method="post">
+                                <button class="btn btn-warning">inactive</button>
+                            </form>
+
+                            {% endif %}
+                        </td>
+                        <td class="d-flex flex-row justify-content-center">
+                            <form onsubmit="if (!confirm('Comfirm deletion ?')) return false;"
+                                action="delete/user?user_id={{user.id}}" method="post" class="px-2">
+                                <button class="btn btn-danger">delete</button>
+                            </form>
+                            <form action="update/user/{{user.id}}" method="get" class="px-2">
+                                <button class="btn btn-primary">update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

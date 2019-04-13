@@ -24,6 +24,7 @@ pycparser==2.19
 PyMySQL==0.9.3
 pyrsistent==0.14.11
 python-dateutil==2.8.0
+python-dotenv==0.10.1
 python-editor==1.0.4
 pytz==2018.9
 relativetimebuilder==0.2.0

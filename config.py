@@ -1,4 +1,11 @@
 import os
+import logging
+from dotenv import load_dotenv
+
+__author__ = 'Tung.Luu'
+_logger = logging.getLogger(__name__)
+
+load_dotenv()
 
 # URL
 HOST_URL = 'http://localhost:5000'
@@ -9,11 +16,11 @@ DATA_DIR = 'data'
 UPLOAD_DIR = 'data/tmp'
 
 # DATABASE
-_DB_NAME = 'echo_cardio'
-_DB_USER = 'tungluu18'
-_DB_PWD = 'tekovn1234'
-_DB_HOST = 'localhost'
-_DB_PORT = '3306'
+_DB_NAME = os.getenv('DB_NAME', 'echo_cardio')
+_DB_USER = os.getenv('DB_USER', 'tungluu18')
+_DB_PWD =  os.getenv('DB_PWD', 'tekovn1234')
+_DB_HOST = os.getenv('DB_HOST', 'localhost')
+_DB_PORT = os.getenv('DB_PORT', '3306')
 
 # SQLALCHEMY
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://%s:%s@%s:%s/%s' % \
