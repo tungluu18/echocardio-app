@@ -41,3 +41,4 @@ def get_404():
 
 from web.admin import activate
 from web.admin import delete_update
+from web.admin import session

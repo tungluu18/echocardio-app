@@ -23,3 +23,14 @@ def save_file_to_dir(dir, file):
     except Exception as err:
         _logger.error(err)
         raise err
+
+def resolve_from_link(link):
+    name = link.split('/')[-1]
+    type = name.split('.')[-1]
+    if type in ['mp4']:
+        type = 'video'
+    elif type in ['jpeg', 'png', 'jpg']:
+        type = ' image'
+    else:
+        type = 'file'
+    return dict({'name': name, 'type': type, 'link': link})

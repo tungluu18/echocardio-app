@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 
 from model import db, Basemodel
+from config import HOST_URL, ROOT_DIR, DATA_DIR
 
 __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
@@ -33,3 +34,11 @@ class Session(Basemodel):
     @staticmethod
     def _data_path(creator_id, session_name):
         return os.path.join(*['backup', str(creator_id), session_name])
+
+    def get_all_files(self):
+        session_path = self._data_path(self.creator_id, self.name)
+        result = []
+        for file in os.listdir(os.path.join(*[ROOT_DIR, DATA_DIR, session_path])):
+            file_download_link = os.path.join(*[HOST_URL, DATA_DIR, session_path, file])
+            result += [file_download_link]
+        return result

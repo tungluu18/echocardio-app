@@ -46,4 +46,3 @@ class Restore(Resource, BaseApi):
                 session_data['data'].append(file__download_link)
             resp.append(session_data)
         return self.api_response(data=resp)
-

@@ -10,6 +10,7 @@ routing_table = dict({
         'activate': '/admin/activate/user',
         'delete': '/admin/delete/user',
         'update': '/admin/update/user',
+        'session': '/admin/view/user',
         '404': '/admin/404'
     })
 })

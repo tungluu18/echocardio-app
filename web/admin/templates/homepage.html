@@ -50,7 +50,6 @@
                                 action="activate/user?user_id={{user.id}}" method="post">
                                 <button class="btn btn-warning">inactive</button>
                             </form>
-
                             {% endif %}
                         </td>
                         <td class="d-flex flex-row justify-content-center">
@@ -61,6 +60,7 @@
                             <form action="update/user/{{user.id}}" method="get" class="px-2">
                                 <button class="btn btn-primary">update</button>
                             </form>
+                            <a href="view/user/{{user.id}}/session" class="btn btn-info">View sessions</a>
                         </td>
                     </tr>
                     {% endfor %}
