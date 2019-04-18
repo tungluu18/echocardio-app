@@ -9,6 +9,7 @@ from model.user import User as UserModel
 from model.session import Session as SessionModel
 from api.api_base import BaseApi
 from api.store import api
+from module.file import validate_file_link
 
 _author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
@@ -44,5 +45,6 @@ class Restore(Resource, BaseApi):
                 file__download_link = os.path.join(
                     *[app.config['HOST_URL'], app.config['DATA_DIR'], session_path, file])
                 session_data['data'].append(file__download_link)
+            session_data['data'] = [validate_file_link(link) for link in session_data['data']]
             resp.append(session_data)
         return self.api_response(data=resp)

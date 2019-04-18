@@ -29,7 +29,7 @@ app.register_blueprint(web_blueprint)
 @app.route('/data/<path:filename>')
 def download_file(filename):
     return send_from_directory(
-        app.config['DATA_DIR'], filename, as_attachment=True)
+        app.config['DATA_DIR'], filename, as_attachment=False)
 
 
 # redirect to api page

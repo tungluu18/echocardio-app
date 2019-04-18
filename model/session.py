@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 
 from model import db, Basemodel
+from module.file import validate_file_link
 from config import HOST_URL, ROOT_DIR, DATA_DIR
 
 __author__ = 'Tung.Luu'
@@ -40,5 +41,5 @@ class Session(Basemodel):
         result = []
         for file in os.listdir(os.path.join(*[ROOT_DIR, DATA_DIR, session_path])):
             file_download_link = os.path.join(*[HOST_URL, DATA_DIR, session_path, file])
-            result += [file_download_link]
+            result += [validate_file_link(file_download_link)]
         return result

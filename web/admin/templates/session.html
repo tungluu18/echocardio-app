@@ -11,10 +11,10 @@
 </head>
 
 <body>
-    <div class="card w-75 my-2 mx-auto" style="width: 18rem;">
-        <div class="card-header bg-primary text-white row w-100 mx-auto">
+    <div class="card w-75 mx-auto" style="width: 18rem;">
+        <div class="card-header bg-info text-white row w-100 mx-auto" style="height: 3rem">
             <h5 class="col-11 align-self-end">Sessions of user {{user.username}}</h5>
-            <a href="../../../homepage" class="btn btn-primary bg-danger text-white col-1">⇦ Back</a>
+            <a href="../../../homepage" class="btn btn-danger btn-sm text-white col-1">⇦ Back</a>
         </div>
         <div class="card-body p-2">
             {% if sessions|length == 0 %}

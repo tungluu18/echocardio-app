@@ -24,13 +24,17 @@ def save_file_to_dir(dir, file):
         _logger.error(err)
         raise err
 
+
+def validate_file_link(link):
+    return link.replace(' ', '%20')
+
 def resolve_from_link(link):
     name = link.split('/')[-1]
     type = name.split('.')[-1]
     if type in ['mp4']:
         type = 'video'
     elif type in ['jpeg', 'png', 'jpg']:
-        type = ' image'
+        type = 'image'
     else:
-        type = 'file'
+        type = 'json'
     return dict({'name': name, 'type': type, 'link': link})

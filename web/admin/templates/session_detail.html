@@ -7,26 +7,85 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel=stylesheet type=text/css href="/static/bootstrap.min.css">
     <link rel="shortcut icon" href="/static/cardiogram.png">
+
     <title>Session</title>
+
+    <!-- <script src="/static/jquery-3.3.1.slim.min.js"></script>
+    <script src="/static/popper.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="card w-75 mx-auto">
-        <div class="card-header bg-primary text-white row w-100 mx-auto">
+        <div class="card-header bg-info text-white row w-100 mx-auto" style="height: 3rem">
             <h5 class="col-11 align-self-end">Session {{session.name}}</h5>
-            <a href="../session" class="btn btn-primary bg-danger text-white col-1">⇦ Back</a>
+            <a href="../session" class="btn btn-danger btn-sm text-white col-1">⇦ Back</a>
         </div>
-        <div class="card-body row d-flex flex-row">
+        <div class="card-body row px-auto">
             {% for file in files %}
-            <div class="col-1">
-                {% if file.type == 'video' %}
-                <img class="img-thumbnail border-0" src="/static/icon-video.png" />
-                {% elif file.type == 'file' %}
-                <img class="img-thumbnail border-0" src="/static/icon-file.png" />
-                {% else %}
-                <img class="img-thumbnail border-0" src="/static/icon-image.png" />
-                {% endif %}
-                <a href={{file.link}}>{{file.name}}</a>
+            <div class="col-sm-2 card m-1 p-0 row" style="max-height: 20rem;">
+                <div class="card-body row p-1">
+                    <div name="thumbnail" class="col-sm-5 px-4">
+                        {% if file.type == 'video' %}
+                        <img class="img-thumbnail border-0" src="/static/icon-video.png" />
+                        {% elif file.type == 'image' %}
+                        <img class="img-thumbnail border-0" src={{file.link}} />
+                        {% else %}
+                        <!-- <img class="img-thumbnail border-0" src="/static/icon-image.png" /> -->
+                        <img class="img-thumbnail border-0" src="/static/icon-file.png" />
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-6 pl-1">
+                        <h6 class="font-weight-bold mx-auto text-primary"
+                            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: small"
+                            data-toggle="tooltip" data-placement="bottom" title={{file.name}}>
+                            {{file.name}}
+                        </h6>
+                        <p class="font-weight-bold mx-auto" style="font-size: small">
+                            Type: {{file.type}}
+                        </p>
+                        <a class="col-sm-10 btn btn-success btn-sm" href={{file.link}}>Download</a>
+                        {% if file.type == 'video' %}
+                        <button type="button" class="mt-1 col-sm-10 btn btn-info btn-sm" data-toggle="modal"
+                            data-target="#modalvideo{{file.name[:-4]}}">View Detail</button>
+
+                        <div id="modalvideo{{file.name[:-4]}}" class="modal fade" tabindex="-1" role="dialog"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content p-2">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="exampleModalLabel">{{file.name[0:-4]}}</h6>
+                                    </div>
+                                    <div class="model-body">
+                                        <div class="embed-responsive embed-responsive-16by9 rounded">
+                                            <iframe src={{file.link}} class="embed-responsive-item"></iframe>
+                                        </div>
+                                        <h6>ahihi</h6>
+                                        <h6>ahihi</h6>
+                                    </div>
+                                    <div class="model-footer d-flex justify-content-end">
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- </div> -->
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
