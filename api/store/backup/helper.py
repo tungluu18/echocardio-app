@@ -49,9 +49,9 @@ def update_video_annotation(session, save_path, files):
         video_file, annotation_file = files
     video_name = annotation_file[:-5]
     # create video on db if not existed
-    video = VideoModel.query.filter_by(name=video_name).first()
+    video = VideoModel.query.filter_by(session_id=session.id, name=video_name).first()
     if not video:
-        video = VideoModel(name=video_name, session_id=session.id)
+        video = VideoModel(session_id=session.id, name=video_name)
         db.session.add(video)
     # load annotation file
     try:

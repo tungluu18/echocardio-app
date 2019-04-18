@@ -10,21 +10,9 @@
 
     <title>Session</title>
 
-    <!-- <script src="/static/jquery-3.3.1.slim.min.js"></script>
     <script src="/static/popper.min.js"></script>
-    <script src="/static/bootstrap.min.js"></script> -->
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="/static/jquery-3.3.1.slim.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -70,10 +58,24 @@
                                     </div>
                                     <div class="model-body">
                                         <div class="embed-responsive embed-responsive-16by9 rounded">
-                                            <iframe src={{file.link}} class="embed-responsive-item"></iframe>
+                                            <video controls="true">
+                                                <source type="video/mp4" src="{{file.link}}"
+                                                    class="embed-responsive-item" />
+                                            </video>
                                         </div>
-                                        <h6>ahihi</h6>
-                                        <h6>ahihi</h6>
+                                        {% if file.data %}
+                                        <table class="table table-bordered table-striped mx-auto my-2">
+                                            <tbody>
+                                                {% for key, value in file.data.items() %}
+                                                <!-- <tr class="table-info"> -->
+                                                <tr>
+                                                    <td class="font-weight-bold">{{key}}</td>
+                                                    <td>{{value}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% endif %}
                                     </div>
                                     <div class="model-footer d-flex justify-content-end">
                                         <button type="button" class="btn btn-secondary btn-sm"
