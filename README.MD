@@ -12,12 +12,12 @@
 ### Nếu sử dụng mysql server trên máy
 #### Cấu hình app: tạo file .env trong trong folder root của project, định nghĩa các giá trị sau
 ##### Cấu hình database trong .env
-    DB_USER={Tên một người dùng trên database}
-    DB_PWD={Mật khẩu của người dùng đó}
-    DB_HOST={Địa chỉ host của database}
-    DB_PORT={Cổng kết nối tới database trên host}
-    DB_NAME={Tên của database}
-Các giá trị mặc địhn (được dùng nếu không có file .env) ở trong file config.py
+    DB_USER=Tên một người dùng trên database
+    DB_PWD=Mật khẩu của người dùng đó
+    DB_HOST=Địa chỉ host của database
+    DB_PORT=Cổng kết nối tới database trên host
+    DB_NAME=Tên của database
+Các giá trị mặc định (được dùng nếu không có file .env) ở trong file config.py
 
 ### Nếu sử dụng docker để host mysql
 Build image cho database từ dockerfile, từ folder root của project
