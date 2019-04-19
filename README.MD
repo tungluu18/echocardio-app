@@ -22,6 +22,7 @@ Các giá trị mặc định (được dùng nếu không có file .env) ở tr
 ### Nếu sử dụng docker để host mysql
 Build image cho database từ dockerfile, từ folder root của project
 > docker build -t database-echo-app .
+
 Start container mysql từ image vừa build
 > docker container run --publish 3307:3306 --name echo-app-sql-service --detach database-echo-app
 
