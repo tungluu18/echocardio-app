@@ -51,7 +51,7 @@ class ChangePassword(Resource, BaseApi):
             return self.api_response(http_code=500, error='Internal server error!')
 
 
-@api.route('<int:user_id>/reset-password')
+@api.route('/<int:user_id>/reset-password')
 class ResetPassword(Resource, BaseApi):
     @api.doc(description='Admin reset mật khẩu của người dùng.')
     @api.expect(reset_password_fields)

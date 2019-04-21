@@ -4,7 +4,7 @@ import logging
 import json
 from flask import request
 from flask_restplus import Resource, fields
-from api.user import api
+from api.user import api, validation
 from api.api_base import BaseApi
 from model.user import User as UserModel, UserSchema
 import util
@@ -56,5 +56,4 @@ class Login(Resource, BaseApi):
             _logger.error(err)
             return self.api_response(error=str(err), http_code=400)
         except Exception as err:
-            return self.api_response(
-                error='Internal server error!', http_code=500)
+            return self.api_response(http_code=500)
