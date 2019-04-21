@@ -24,8 +24,11 @@ def valid_req(request, comp_attr=[], ext_attr=[]):
         :param [str] ext_attr: extended attributes
     """
     try:
-        req_loaded = json.loads(request.data)
-    except Exception as e:
+        data = request.data
+        if isinstance(data, bytes):
+            data = data.decode()
+        req_loaded = json.loads(data)
+    except Exception as err:
         raise ValueError(
             'Cannot parse request, request format must be application/json!')
     req_attr = req_loaded.keys()

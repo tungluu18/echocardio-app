@@ -124,3 +124,4 @@ class Users(Resource, BaseApi):
 
 from api.user import signup
 from api.user import login
+from api.user import password
