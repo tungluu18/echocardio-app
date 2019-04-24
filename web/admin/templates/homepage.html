@@ -33,14 +33,14 @@
                     {% for user in users %}
                     <tr>
                         <td class='text-center'>{{user.id}}</td>
-                        <td>{{user.username}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.phone}}</td>
-                        <td>{{user.address}}</td>
-                        <td>{{user.organization}}</td>
-                        <td>{{user.department}}</td>
-                        <td>{{user.job}}</td>
-                        <td class="text-center">
+                        <td class="align-middle">{{user.username}}</td>
+                        <td class="align-middle">{{user.email}}</td>
+                        <td class="align-middle">{{user.phone}}</td>
+                        <td class="align-middle">{{user.address}}</td>
+                        <td class="align-middle">{{user.organization}}</td>
+                        <td class="align-middle">{{user.department}}</td>
+                        <td class="align-middle">{{user.job}}</td>
+                        <td class="text-center align-middle">
                             {% if user.status == 'active' %}
                             <button class="btn btn-success">
                                 active
@@ -52,15 +52,20 @@
                             </form>
                             {% endif %}
                         </td>
-                        <td class="d-flex flex-row justify-content-center">
-                            <form onsubmit="if (!confirm('Comfirm deletion ?')) return false;"
-                                action="delete/user?user_id={{user.id}}" method="post" class="px-2">
-                                <button class="btn btn-danger">delete</button>
-                            </form>
-                            <form action="update/user/{{user.id}}" method="get" class="px-2">
-                                <button class="btn btn-primary">update</button>
-                            </form>
-                            <a href="view/user/{{user.id}}/session" class="btn btn-info">View sessions</a>
+                        <td class="d-flex flex-column">
+                            <div class="row justify-content-center my-1">
+                                <form onsubmit="if (!confirm('Comfirm deletion ?')) return false;"
+                                    action="delete/user?user_id={{user.id}}" method="post" class="px-1 col-5">
+                                    <button class="btn btn-danger w-100">delete</button>
+                                </form>
+                                <a href="view/user/{{user.id}}/session" class="col-6 btn btn-info px-1">View sessions</a>
+                            </div>
+                            <div class="row justify-content-center">
+                                <form action="update/user/{{user.id}}" method="get" class="px-1 col-5">
+                                    <button class="btn btn-primary w-100">update</button>
+                                </form>
+                                <a href="reset-password/user/{{user.id}}" class="px-1 col-6 btn btn-secondary">Reset password</a>
+                            </div>
                         </td>
                     </tr>
                     {% endfor %}

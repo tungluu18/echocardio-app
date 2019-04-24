@@ -53,7 +53,6 @@ def update_user(user_id):
             raise Exception()
         for key in user_fields:
             value = content.get(key, None)
-            print(key, value)
             if value:
                 setattr(user, key, value)
         db.session.commit()
