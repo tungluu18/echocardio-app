@@ -42,17 +42,3 @@ class Session(Resource, BaseApi):
                 id=int(create_args['creator_id'])).first():
             return self.api_response(error='Người tạo không hợp lệ',
                                      http_code=400)
-
-        # try:
-        #     session = SessionModel(**create_args)
-        #     db.session.add(session)
-        #     db.session.commit()
-        #     data_path = create_session_folder(session.id)
-        #     setattr(session, 'data_path', get_session_folder_path(session.id))
-        #     db.session.commit()
-        #     return self.api_response(data={'session_id': session.id})
-        # except Exception as e:
-        #     _logger.error(e)
-        #     db.session.rollback()
-        #     return self.api_response(error='Internal server error!',
-        #                              http_code=500)

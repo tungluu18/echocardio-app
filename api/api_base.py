@@ -37,6 +37,8 @@ class BaseApi(object):
             error, http_code = handled_error.message, handled_error.error_code
         if http_code == 500:
             error = error or 'Internal server error!'
+        if http_code == 200:
+            data = data or 'Success'
         return {
             'error': error,
             'data': data

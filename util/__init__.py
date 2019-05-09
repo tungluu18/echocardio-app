@@ -9,6 +9,10 @@ __author__ = 'Tung.Luu'
 _logger = logging.getLogger(__name__)
 
 
+video_exts = ['mp4']
+image_exts = ['jpeg', 'png', 'jpg']
+
+
 def filter_attr(obj, attr):
     return {key: obj[key] for key in (attr & obj.keys())}
 

@@ -28,6 +28,12 @@ def save_file_to_dir(dir, file):
 def validate_file_link(link):
     return link.replace(' ', '%20')
 
+
+def sol_ext(filename):
+    i = filename.rfind('.')
+    return filename[:i], filename[i+1:]
+
+
 def resolve_from_link(link):
     name = link.split('/')[-1]
     type = name.split('.')[-1]
